@@ -15,7 +15,13 @@ router.post("", async (req, res) => {
 });
 router.get("", async function(req, res) {
     try {
-        const teachers= await Teacher.find().lean().exec();
+        let teachers
+        if(req.query.name){
+            teachers= await Teacher.find({name:{$eq: req.query.name}}).lean().exec();
+        }
+        else{
+            teachers= await Teacher.find().lean().exec();
+        }
 
         return res.status(200).send(teachers);
     } catch (error) {

@@ -4,20 +4,48 @@ import "./Home.scss";
 
 export const Home = () => {
   const [items, setItems] = React.useState([]);
+  const [input, setInput] = React.useState();
   React.useEffect(() => {
+    HandleAll();
+  }, []);
+
+  const HandleAll = () => {
     axios.get("http://localhost:7492/class").then((response) => {
       //   console.log(response.data);
       setItems(response.data);
     });
-  }, []);
+  };
 
   const HandleMale = () => {
     // axios.get("http://localhost:7492/class").then((response) => {});
     alert("Sorry this functionality is not available now");
   };
 
+  const Search = () => {
+    axios
+      .get(`http://localhost:7492/teacher?name=${input}`)
+      .then((response) => {
+        let X = response.data[0]._id;
+        axios
+          .get(`http://localhost:7492/class?teacher_id=${X}`)
+          .then((response) => {
+            console.log(response);
+            setItems(response.data);
+          });
+      });
+  };
   return (
     <div className="Home_main">
+      <input
+        type="text"
+        placeholder="Enter Teacher Name"
+        className="but"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={Search}>Search</button>
+      <br />
+      <br />
       <button className="but" onClick={HandleMale}>
         Male
       </button>
@@ -27,7 +55,10 @@ export const Home = () => {
       <button className="but" onClick={HandleMale}>
         Age ascending
       </button>
-      <button onClick={HandleMale}>Age descending</button>
+      <button className="but" onClick={HandleMale}>
+        Age descending
+      </button>
+      <button onClick={HandleAll}>All</button>
       <div className="Sub-main">
         {items.map((item) => (
           <div key={item.id} className="Item">
