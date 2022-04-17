@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const classSchema= new mongoose.Schema(
     {
-        grade: {type: 'string', required: true},
-        section: {type: 'string', required: true},
-        subject: {type: 'string', required: true},
-        teacher_id: {type: mongoose.Schema.Types.ObjectId, ref: "teacher", required: true}
+        grade: {type: String, required: true},
+        section: {type: String, required: true},
+        subject: {type: String, required: true},
+        teacher_id: {type: mongoose.Schema.Types.ObjectId, ref: "Teacher", required: true}
     },
     {
         versionKey: false,
@@ -13,4 +13,4 @@ const classSchema= new mongoose.Schema(
     }
 );
 
-module.exports= mongoose.model("class", classSchema);
+module.exports= mongoose.model("Class", classSchema);
