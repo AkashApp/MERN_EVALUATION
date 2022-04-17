@@ -10,9 +10,24 @@ export const Home = () => {
       setItems(response.data);
     });
   }, []);
-  console.log(items);
+
+  const HandleMale = () => {
+    // axios.get("http://localhost:7492/class").then((response) => {});
+    alert("Sorry this functionality is not available now");
+  };
+
   return (
     <div className="Home_main">
+      <button className="but" onClick={HandleMale}>
+        Male
+      </button>
+      <button className="but" onClick={HandleMale}>
+        Female
+      </button>
+      <button className="but" onClick={HandleMale}>
+        Age ascending
+      </button>
+      <button onClick={HandleMale}>Age descending</button>
       <div className="Sub-main">
         {items.map((item) => (
           <div key={item.id} className="Item">

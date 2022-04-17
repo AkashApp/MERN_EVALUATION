@@ -18,7 +18,7 @@ router.get("", async function(req, res) {
     try {
         let admin;
         if(req.query.username){
-            admin= await Admin.find({username:{$eq:req.query.username}}).lean().exec();
+            admin= await Admin.find({adminname:{$eq:req.query.username}}).lean().exec();
         }else{
             admin= await Admin.find().lean().exec();
         }

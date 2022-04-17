@@ -1,15 +1,28 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { usernames, password } from "../Redux/action";
+import { Link, useNavigate } from "react-router-dom";
+import { username, password } from "../Redux/action";
 import axios from "axios";
 
 export const Admin = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const Navigate = useNavigate();
 
   const HandleClick = () => {
-    axios.get("http://localhost:7492/admin");
+    axios
+      .get(`http://localhost:7492/admin?username=${username}`)
+      .then((response) => {
+        //   response.data[0].password
+        if (response.data[0].password == password) {
+          Navigate("/schedule");
+          console.log("Done");
+        }
+      })
+      .catch((error) => {
+        alert("Username Or password is incorrect");
+        console.log(error.message);
+      });
   };
   return (
     <div>

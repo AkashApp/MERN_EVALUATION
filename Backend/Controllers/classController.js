@@ -15,7 +15,8 @@ router.post("/", async (req, res) => {
 });
 router.get("/", async function(req, res) {
     try {
-        const getclasses= await Class.find().populate({path:"teacher_id", select: "name"}).lean().exec();
+        
+            const getclasses= await Class.find().populate({path:"teacher_id"}).lean().exec();
 
         return res.status(200).send(getclasses);
     } catch (err) {
