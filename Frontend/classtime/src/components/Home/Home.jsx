@@ -17,8 +17,28 @@ export const Home = () => {
   };
 
   const HandleMale = () => {
-    // axios.get("http://localhost:7492/class").then((response) => {});
-    alert("Sorry this functionality is not available now");
+    axios.get(`http://localhost:7492/teacher?gender=Male`).then((response) => {
+      let X = response.data[0]._id;
+      axios
+        .get(`http://localhost:7492/class?teacher_id=${X}`)
+        .then((response) => {
+          console.log(response);
+          setItems(response.data);
+        });
+    });
+  };
+  const HandleFemale = () => {
+    axios
+      .get(`http://localhost:7492/teacher?gender=Female`)
+      .then((response) => {
+        let X = response.data[0]._id;
+        axios
+          .get(`http://localhost:7492/class?teacher_id=${X}`)
+          .then((response) => {
+            console.log(response);
+            setItems(response.data);
+          });
+      });
   };
 
   const Search = () => {
@@ -49,7 +69,7 @@ export const Home = () => {
       <button className="but" onClick={HandleMale}>
         Male
       </button>
-      <button className="but" onClick={HandleMale}>
+      <button className="but" onClick={HandleFemale}>
         Female
       </button>
       <button className="but" onClick={HandleMale}>

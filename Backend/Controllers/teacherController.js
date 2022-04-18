@@ -19,6 +19,9 @@ router.get("", async function(req, res) {
         if(req.query.name){
             teachers= await Teacher.find({name:{$eq: req.query.name}}).lean().exec();
         }
+        else if(req.query.gender){
+            teachers= await Teacher.find({gender:{$eq: req.query.gender}}).lean().exec();
+        }
         else{
             teachers= await Teacher.find().lean().exec();
         }
