@@ -54,6 +54,9 @@ export const Home = () => {
           });
       });
   };
+  const HandleAge = () => {
+    alert("THis functionality is not completed");
+  };
   return (
     <div className="Home_main">
       <input
@@ -72,10 +75,10 @@ export const Home = () => {
       <button className="but" onClick={HandleFemale}>
         Female
       </button>
-      <button className="but" onClick={HandleMale}>
+      <button className="but" onClick={HandleAge}>
         Age ascending
       </button>
-      <button className="but" onClick={HandleMale}>
+      <button className="but" onClick={HandleAge}>
         Age descending
       </button>
       <button onClick={HandleAll}>All</button>
